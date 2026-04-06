@@ -40,7 +40,7 @@ The core architecture is built: 9 agents, 14 skills, 8 language profiles, brain 
 
 ## Phase 2: Paper-to-Package — Apr 17–30
 
-**Problem**: StatsClaw's killer feature doesn't exist yet. No other tool can turn a paper into a verified package — but StatsClaw can't either, today.
+**Problem**: StatsClaw can already ingest uploaded files and produce specs from them. What's missing is structured paper ingestion — tracing every formula back to the source, mapping simulation sections to specs automatically, and handling raw PDFs.
 
 - [ ] **LaTeX paper ingestion** — `skills/paper-ingestion/SKILL.md`. arXiv LaTeX first. Every formula carries `paper-ref` (section + line) for traceability.
 - [ ] **Symbol dictionary** — Every symbol in the spec traces back to the paper. Reviewer checks 100% coverage.
@@ -55,36 +55,18 @@ The core architecture is built: 9 agents, 14 skills, 8 language profiles, brain 
 
 ## Phase 3: Interactive Specification — May 1–14
 
-**Problem**: Users must specify everything in one shot. Complex packages need back-and-forth refinement — especially when translating math into code.
+**Problem**: StatsClaw already handles multi-turn conversations and iterative refinement. What needs deepening: structured LaTeX formula input, visual diagram support, and conversational simulation design where users tweak DGP parameters interactively.
 
-- [ ] **Multi-turn conversation** — Leader accumulates context, planner incrementally updates spec.md.
 - [ ] **LaTeX formula input** → structured spec generation.
 - [ ] **Visual diagram support** — DAGs, model diagrams.
 - [ ] **Interactive simulation design** — Choose DGP parameters conversationally.
 - [ ] **Incremental refinement** — Update package from follow-up papers.
 
-**Done when**: A user can refine an estimator spec across 5+ conversation turns without restarting.
+**Done when**: A user can input LaTeX formulas and refine DGP parameters conversationally across multiple turns.
 
 ---
 
-## Phase 4: Community — May 1–21
-
-**Problem**: StatsClaw is a solo project. Scaling requires community contributions — profiles, skills, estimator implementations, knowledge entries.
-
-- [ ] **Plugin architecture** — Community-contributed profiles and skills with review process.
-- [ ] **Estimator registry** — Browse and build on existing implementations.
-- [ ] **Brain expansion** — Grow shared knowledge across domains.
-- [ ] **Brain search** — Tag-based and semantic retrieval.
-- [ ] **Brain analytics** — Track which entries are most useful.
-- [ ] **Collaborative workflow** — Multiple contributors on one package.
-- [ ] **Benchmark suite** — Auto-compare new estimator against existing methods.
-- [ ] **CI for generated packages**.
-
-**Done when**: 5+ community-contributed profiles or skills merged via PR.
-
----
-
-## Phase 5: Intelligence — May 22–31
+## Phase 4: Intelligence — May 15–31
 
 **Problem**: Users still need to know which estimators exist and how theirs compares. StatsClaw should find this automatically.
 
@@ -97,10 +79,24 @@ The core architecture is built: 9 agents, 14 skills, 8 language profiles, brain 
 
 ---
 
+## Community (ongoing since Mar 30, parallel with all phases)
+
+Community building is not a phase — it runs continuously alongside everything else.
+
+- [ ] **Plugin architecture** — Community-contributed profiles and skills with review process.
+- [ ] **Estimator registry** — Browse and build on existing implementations.
+- [ ] **Brain expansion** — Grow shared knowledge across domains.
+- [ ] **Brain search** — Tag-based and semantic retrieval.
+- [ ] **Brain analytics** — Track which entries are most useful.
+- [ ] **Collaborative workflow** — Multiple contributors on one package.
+- [ ] **Benchmark suite** — Auto-compare new estimator against existing methods.
+- [ ] **CI for generated packages**.
+
+---
+
 ## Ecosystem Track (ongoing, parallel with all phases)
 
 - [ ] **Brain end-to-end validation** — 10 real workflows → 10 knowledge entries → full pipeline verified.
-- [ ] **Brain tag-based search** — Rebuild `brain/index.md` with proper retrieval.
 - [ ] **C/C++ profile expansion** — Match R profile depth.
 - [ ] **Telemetry** — `run-stats.json` in workspace repo (counts, retries, signal frequencies).
 - [ ] **Agent development guide** — `docs/AGENT_DEV_GUIDE.md` for prompt change review standards.
@@ -111,12 +107,12 @@ The core architecture is built: 9 agents, 14 skills, 8 language profiles, brain 
 ## Execution Order
 
 ```text
+Ongoing:    Community building + ecosystem track (started Mar 30)
 Apr 6–9:    Phase 0 — adoption blockers (all 6 in parallel)
 Apr 10–16:  Phase 1 — self-testing (eval + routing + isolation + dogfooding)
-Apr 17–30:  Phase 2 — paper-to-package ∥ ecosystem track
-May 1–14:   Phase 3 — interactive specification
-May 1–21:   Phase 4 — community (parallel with Phase 3)
-May 22–31:  Phase 5 — intelligence
+Apr 17–30:  Phase 2 — paper-to-package
+May 1–14:   Phase 3 — deepen interactive specification
+May 15–31:  Phase 4 — intelligence
 ```
 
 ---
@@ -128,9 +124,9 @@ May 22–31:  Phase 5 — intelligence
 | Apr 9 | Hello-world ships | Post to r/statistics, r/econometrics, Hacker News |
 | Apr 16 | Eval harness live | Blog: "How we test an AI agent framework" |
 | Apr 30 | **Paper-to-Package demo** | **Blog + Twitter + EconTwitter — biggest moment** |
-| May 21 | Community launch | "Contribute a profile" campaign |
+| May 14 | Interactive deepening done | Demo: conversational simulation design |
 | May 31 | Intelligence features | Submit demo to useR! / PyData / StanCon |
-| Monthly | Ongoing | Release notes + brain knowledge newsletter |
+| Monthly | Ongoing | Release notes + community highlights + brain newsletter |
 
 **Positioning**: StatsClaw's audit trail + adversarial verification satisfies reproducibility requirements from top journals (AEA, QJE, APSR). No other AI coding tool does this.
 
@@ -143,7 +139,7 @@ May 22–31:  Phase 5 — intelligence
 | Apr 9 | New user runs hello-world in 5 minutes |
 | Apr 16 | CI blocks isolation-breaking PRs |
 | Apr 30 | One arXiv paper → verified R package end to end |
-| May 21 | 5+ community-contributed profiles or skills merged |
+| May 14 | LaTeX formula input + conversational DGP design working |
 | May 31 | Auto-generated "related work" table for any new estimator |
 
 ---
