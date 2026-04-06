@@ -67,20 +67,7 @@ The core architecture is built: 9 agents, 14 skills, 8 language profiles, brain 
 
 ---
 
-## Phase 4: Multi-Language Shipping — May 1–14 (parallel with Phase 3)
-
-**Problem**: Statisticians need packages in R, Python, AND Stata. Today StatsClaw generates one language at a time with no cross-language verification.
-
-- [ ] **Cross-language generation** — Same estimator → R + Python + Stata simultaneously. Numerical alignment tests verify identical results.
-- [ ] **Submission automation** — CRAN / PyPI / npm / SSC via shipper.
-- [ ] **Cross-ecosystem dependency management**.
-- [ ] **Documentation site generation** — pkgdown / Quarto.
-
-**Done when**: Same estimator ships as R + Python packages with verified numerical equivalence.
-
----
-
-## Phase 5: Community — May 15–31
+## Phase 4: Community — May 1–21
 
 **Problem**: StatsClaw is a solo project. Scaling requires community contributions — profiles, skills, estimator implementations, knowledge entries.
 
@@ -97,7 +84,7 @@ The core architecture is built: 9 agents, 14 skills, 8 language profiles, brain 
 
 ---
 
-## Phase 6: Intelligence — Jun 1–15
+## Phase 5: Intelligence — May 22–31
 
 **Problem**: Users still need to know which estimators exist and how theirs compares. StatsClaw should find this automatically.
 
@@ -117,6 +104,7 @@ The core architecture is built: 9 agents, 14 skills, 8 language profiles, brain 
 - [ ] **C/C++ profile expansion** — Match R profile depth.
 - [ ] **Telemetry** — `run-stats.json` in workspace repo (counts, retries, signal frequencies).
 - [ ] **Agent development guide** — `docs/AGENT_DEV_GUIDE.md` for prompt change review standards.
+- [ ] **Registry submission automation** — CRAN / PyPI / SSC submission via shipper. Profiles already handle multi-language; this adds the last-mile publish step.
 
 ---
 
@@ -126,9 +114,9 @@ The core architecture is built: 9 agents, 14 skills, 8 language profiles, brain 
 Apr 6–9:    Phase 0 — adoption blockers (all 6 in parallel)
 Apr 10–16:  Phase 1 — self-testing (eval + routing + isolation + dogfooding)
 Apr 17–30:  Phase 2 — paper-to-package ∥ ecosystem track
-May 1–14:   Phase 3 (interactive) ∥ Phase 4 (cross-language)
-May 15–31:  Phase 5 — community
-Jun 1–15:   Phase 6 — intelligence
+May 1–14:   Phase 3 — interactive specification
+May 1–21:   Phase 4 — community (parallel with Phase 3)
+May 22–31:  Phase 5 — intelligence
 ```
 
 ---
@@ -140,8 +128,8 @@ Jun 1–15:   Phase 6 — intelligence
 | Apr 9 | Hello-world ships | Post to r/statistics, r/econometrics, Hacker News |
 | Apr 16 | Eval harness live | Blog: "How we test an AI agent framework" |
 | Apr 30 | **Paper-to-Package demo** | **Blog + Twitter + EconTwitter — biggest moment** |
-| May 14 | Cross-language demo | Submit to useR! / PyData / StanCon |
-| May 31 | Community launch | "Contribute a profile" campaign |
+| May 21 | Community launch | "Contribute a profile" campaign |
+| May 31 | Intelligence features | Submit demo to useR! / PyData / StanCon |
 | Monthly | Ongoing | Release notes + brain knowledge newsletter |
 
 **Positioning**: StatsClaw's audit trail + adversarial verification satisfies reproducibility requirements from top journals (AEA, QJE, APSR). No other AI coding tool does this.
@@ -155,8 +143,8 @@ Jun 1–15:   Phase 6 — intelligence
 | Apr 9 | New user runs hello-world in 5 minutes |
 | Apr 16 | CI blocks isolation-breaking PRs |
 | Apr 30 | One arXiv paper → verified R package end to end |
-| May 14 | Same estimator ships as R + Python |
-| Jun 15 | 10+ external contributors |
+| May 21 | 5+ community-contributed profiles or skills merged |
+| May 31 | Auto-generated "related work" table for any new estimator |
 
 ---
 
