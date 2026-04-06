@@ -27,14 +27,14 @@ The core architecture is built: 9 agents, 14 skills, 8 language profiles, brain 
 
 ## Phase 1: Self-Testing — Apr 10–16
 
-**Problem**: Any prompt edit can silently break pipeline isolation, routing, or agent behavior. There are no automated tests for the framework itself.
+**Problem**: There are no automated tests for StatsClaw itself. A bad prompt edit can silently break the whole framework and nobody would know until a real workflow fails.
 
-- [ ] **Agent eval harness** — `tests/evals/` with 10+ golden fixtures per agent. Builder must never see test-spec. Tester must never see spec. Run on every PR.
-- [ ] **Routing regression tests** — `tests/routing/fixtures.yml` with 150+ prompt→workflow mappings. Chinese, English, Spanish, Japanese.
-- [ ] **Isolation static checker** — Script that scans agent definitions for cross-pipeline spec references. Integrated into CI.
-- [ ] **Dogfooding** — Fix all StatsClaw issues using StatsClaw. Publish run logs to `statsclaw/example-statsclaw-self`.
+- [ ] **Agent tests** — Feed each agent a fixed input, check it produces correct output and doesn't leak across pipelines. 10+ test cases per agent, runs on every PR.
+- [ ] **Routing tests** — 150+ example prompts (multi-language) mapped to expected workflows. Catches misrouting before it ships.
+- [ ] **Isolation checker** — Script that verifies no agent can see specs it shouldn't. Runs in CI.
+- [ ] **Dogfooding** — Use StatsClaw to fix StatsClaw's own issues. Publish the run logs as proof it works.
 
-**Done when**: CI blocks any PR that breaks pipeline isolation or misroutes a prompt.
+**Done when**: CI catches broken prompts automatically.
 
 ---
 
