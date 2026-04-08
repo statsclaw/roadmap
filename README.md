@@ -102,9 +102,29 @@ Pipeline isolation — where build, test, and simulation agents can't see each o
 
 ---
 
-## How to Influence This Roadmap
+## Get Involved
 
-- **Feature requests**: [Open an issue](https://github.com/statsclaw/statsclaw/issues/new?template=feature-request.yml)
+This roadmap is shaped by the people who use StatsClaw. Here's how to participate:
+
+### Vote on priorities
+
+Every roadmap item has a matching [issue in this repo](https://github.com/statsclaw/roadmap/issues). Add a 👍 to the items you care about. We use these votes to decide what to work on next — the most-upvoted items move up.
+
+### Show what you built
+
+If you've used StatsClaw to build or improve a package, open a PR to add it to [`SHOWCASE.md`](SHOWCASE.md). A short description and a link to the repo is all it takes. Real usage examples are the most valuable thing this project can have.
+
+### Propose a new direction
+
+Have an idea that isn't on the roadmap? [Open an RFC issue](https://github.com/statsclaw/roadmap/issues/new?template=rfc.yml) describing what you want and why. If the community is interested, it gets added.
+
+### Claim a task
+
+See something on the roadmap you'd like to work on? Comment on its issue to claim it. We'll coordinate to avoid duplicate effort. Contributions don't have to be code — profiles, documentation, test cases, and example workflows all count.
+
+### Other ways to contribute
+
+- **Feature requests**: [Open an issue on the main repo](https://github.com/statsclaw/statsclaw/issues/new?template=feature-request.yml)
 - **Paper-to-Package requests**: [Submit a paper](https://github.com/statsclaw/statsclaw/issues/new?template=paper-to-package.yml)
 - **Discussions**: [Ideas board](https://github.com/statsclaw/statsclaw/discussions/categories/ideas)
-- **Contribute**: [CONTRIBUTING.md](https://github.com/statsclaw/statsclaw/blob/main/CONTRIBUTING.md)
+- **Code contributions**: [CONTRIBUTING.md](https://github.com/statsclaw/statsclaw/blob/main/CONTRIBUTING.md)

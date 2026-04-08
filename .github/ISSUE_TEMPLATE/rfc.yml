@@ -1,0 +1,31 @@
+name: RFC — Propose a New Direction
+description: Suggest a new feature or direction for the StatsClaw roadmap
+title: "[RFC] "
+labels: ["rfc"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Propose something you'd like to see on the roadmap. Keep it short — a few sentences is fine.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: What's the pain point or opportunity?
+      placeholder: "e.g., I work with spatial econometrics and there's no profile for it..."
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like StatsClaw to do?
+      description: Describe the feature or direction. Doesn't need to be detailed.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Any additional context?
+      description: Links to papers, related tools, examples, etc.
+    validations:
+      required: false

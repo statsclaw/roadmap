@@ -1,0 +1,29 @@
+name: Roadmap Item
+description: Track and vote on a specific roadmap item
+title: ""
+labels: ["roadmap-item"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue tracks a roadmap item. Add a 👍 reaction to vote for it.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What this item is about and why it matters.
+    validations:
+      required: true
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Phase
+      options:
+        - "Phase 0: Onboarding"
+        - "Phase 1: Self-Testing"
+        - "Phase 2: Paper-to-Package"
+        - "Phase 3: Interactive Specification"
+        - "Longer-Term"
+        - "Infrastructure"
+    validations:
+      required: true
