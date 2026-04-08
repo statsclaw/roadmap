@@ -1,146 +1,104 @@
 # StatsClaw Roadmap
 
-> **Vision**: Input a paper, a conversation, or a set of formulas — get a production-ready statistical package.
+> StatsClaw helps researchers build statistical packages with AI agent teams. This roadmap tracks what we're working on next.
 
 ---
 
-## Current Status
+## Where We Are
 
-The core architecture is built: 9 agents, 14 skills, 8 language profiles, brain knowledge-sharing. What's missing is everything that turns this from a working prototype into something people actually use.
+StatsClaw is an early-stage framework. The core agent architecture works — 9 agents with pipeline isolation, 8 language profiles, a set of skills and templates. We've used it to build a few packages ([probit](https://github.com/statsclaw/example-probit), [R2PY](https://github.com/statsclaw/example-R2PY)) and contribute to existing ones ([fect](https://github.com/statsclaw/example-fect), [panelView](https://github.com/statsclaw/example-panelView)). Those examples are the best way to judge what it can do today.
 
----
-
-## Phase 0: Adoption Blockers — Apr 6–9
-
-**Problem**: Nobody can try StatsClaw today. There's no demo, no troubleshooting guide, and key profiles are too thin to work on real projects.
-
-- [ ] **Hello-world demo** — `examples/hello-world/` with a tiny R package + complete workflow snapshot. 5 minutes to understand, zero terminology.
-- [ ] **Julia language profile** — `profiles/julia-package.md`. Julia is everywhere in statistics. [statsclaw/statsclaw#3](https://github.com/statsclaw/statsclaw/issues/3).
-- [ ] **Troubleshooting guide** — `docs/TROUBLESHOOTING.md`. Organized by symptom, not internals.
-- [ ] **Stata profile expansion** — Current profile is 2.2 KB vs R's 8.5 KB. Real Stata workflows will stall.
-- [ ] **Cost visibility** — "Cost Summary" section in `templates/log-entry.md`. Users need to know what each run costs.
-- [ ] **README update** — Hello-world link at top. Dogfooding badge.
-
-**Done when**: A stranger runs the full workflow in 5 minutes from the hello-world example.
+There's a lot still missing: no automated tests for the framework itself, no easy onboarding path, some language profiles are too thin for real work, and the shared knowledge system (brain) has very little content so far.
 
 ---
 
-## Phase 1: Self-Testing — Apr 10–16
+## Phase 0: Adoption Blockers — Apr 8–14
 
-**Problem**: There are no automated tests for StatsClaw itself. A bad prompt edit can silently break the whole framework and nobody would know until a real workflow fails.
+Making it possible for someone outside the team to actually try StatsClaw.
 
-- [ ] **Agent tests** — Feed each agent a fixed input, check it produces correct output and doesn't leak across pipelines. 10+ test cases per agent, runs on every PR.
-- [ ] **Routing tests** — 150+ example prompts (multi-language) mapped to expected workflows. Catches misrouting before it ships.
-- [ ] **Isolation checker** — Script that verifies no agent can see specs it shouldn't. Runs in CI.
-- [ ] **Dogfooding** — Use StatsClaw to fix StatsClaw's own issues. Publish the run logs as proof it works.
-
-**Done when**: CI catches broken prompts automatically.
-
----
-
-## Phase 2: Paper-to-Package — Apr 17–30
-
-**Problem**: StatsClaw can already ingest uploaded files and produce specs from them. What's missing is structured paper ingestion — tracing every formula back to the source, mapping simulation sections to specs automatically, and handling raw PDFs.
-
-- [ ] **LaTeX paper ingestion** — `skills/paper-ingestion/SKILL.md`. arXiv LaTeX first. Every formula carries `paper-ref` (section + line) for traceability.
-- [ ] **Symbol dictionary** — Every symbol in the spec traces back to the paper. Reviewer checks 100% coverage.
-- [ ] **Paper simulation → specs** — Map Table 2 directly into `test-spec.md` acceptance criteria and `sim-spec.md` DGP parameters.
-- [ ] **PDF support** — General PDFs beyond LaTeX.
-- [ ] **End-to-end demo** — Real arXiv paper → installable R package with Monte Carlo verification. Published as `statsclaw/example-paper-to-pkg`. Blog post.
-- [ ] **Auto-generate vignettes** from paper examples.
-
-**Done when**: `"build the R package from this arXiv paper"` produces an installable, verified R package end to end.
+- [ ] **Hello-world demo** — `examples/hello-world/` with a small R package and a complete workflow snapshot.
+- [ ] **Julia language profile** — `profiles/julia-package.md`. [statsclaw/statsclaw#3](https://github.com/statsclaw/statsclaw/issues/3).
+- [ ] **Troubleshooting guide** — `docs/TROUBLESHOOTING.md`. Organized by symptom.
+- [ ] **Stata profile expansion** — Current profile is much thinner than R's. Needs work before real Stata workflows.
+- [ ] **Cost visibility** — Show what each run costs in the run log.
+- [ ] **README update** — Link to hello-world, clarify what's working vs. what's planned.
 
 ---
 
-## Phase 3: Interactive Specification — May 1–14
+## Phase 1: Self-Testing — Apr 15–25
 
-**Problem**: StatsClaw already handles multi-turn conversations and iterative refinement. What needs deepening: structured LaTeX formula input, visual diagram support, and conversational simulation design where users tweak DGP parameters interactively.
+A bad prompt edit can silently break the framework. We need basic regression coverage.
 
-- [ ] **LaTeX formula input** → structured spec generation.
-- [ ] **Visual diagram support** — DAGs, model diagrams.
-- [ ] **Interactive simulation design** — Choose DGP parameters conversationally.
-- [ ] **Incremental refinement** — Update package from follow-up papers.
-
-**Done when**: A user can input LaTeX formulas and refine DGP parameters conversationally across multiple turns.
+- [ ] **Agent smoke tests** — Feed each agent a fixed input, check it produces reasonable output and doesn't leak across pipelines.
+- [ ] **Routing tests** — Example prompts mapped to expected workflows. Catches misrouting.
+- [ ] **Isolation checker** — Verify no agent can access specs it shouldn't. Run in CI.
+- [ ] **Dogfooding** — Use StatsClaw to work on StatsClaw's own issues. Publish the run logs.
 
 ---
 
-## Phase 4: Intelligence — May 15–31
+## Phase 2: Paper-to-Package — Apr 25 – May 15
 
-**Problem**: Users still need to know which estimators exist and how theirs compares. StatsClaw should find this automatically.
+StatsClaw can already work from uploaded files and conversation. We want to improve structured paper ingestion — but this is a hard problem and we're approaching it incrementally.
 
-- [ ] **Automatic literature review** — Find related estimators and compare.
-- [ ] **Numerical stability analysis** built into code generation.
-- [ ] **Performance profiling** and optimization suggestions.
-- [ ] **Edge case detection** from mathematical properties.
+- [ ] **LaTeX paper ingestion** — Start with arXiv LaTeX. Track where each formula comes from (`paper-ref`).
+- [ ] **Symbol tracing** — Every symbol in the spec should map back to the paper.
+- [ ] **Simulation mapping** — Connect paper simulation sections to spec parameters where possible.
+- [ ] **PDF support** — Broaden beyond LaTeX sources.
+- [ ] **Case study** — If this works well enough, publish a real paper-to-package example.
 
-**Done when**: StatsClaw auto-generates a "related work" comparison table for any new estimator.
-
----
-
-## Community (ongoing since Mar 30, parallel with all phases)
-
-Community building is not a phase — it runs continuously alongside everything else.
-
-- [ ] **Plugin architecture** — Community-contributed profiles and skills with review process.
-- [ ] **Estimator registry** — Browse and build on existing implementations.
-- [ ] **Brain expansion** — Grow shared knowledge across domains.
-- [ ] **Brain search** — Tag-based and semantic retrieval.
-- [ ] **Brain analytics** — Track which entries are most useful.
-- [ ] **Collaborative workflow** — Multiple contributors on one package.
-- [ ] **Benchmark suite** — Auto-compare new estimator against existing methods.
-- [ ] **CI for generated packages**.
+"Paper → installable package" involves many judgment calls that still need researcher involvement. We're exploring how far automation can go, not promising a fully hands-off pipeline.
 
 ---
 
-## Ecosystem Track (ongoing, parallel with all phases)
+## Phase 3: Interactive Specification — May 15–31
 
-- [ ] **Brain end-to-end validation** — 10 real workflows → 10 knowledge entries → full pipeline verified.
-- [ ] **C/C++ profile expansion** — Match R profile depth.
-- [ ] **Telemetry** — `run-stats.json` in workspace repo (counts, retries, signal frequencies).
-- [ ] **Agent development guide** — `docs/AGENT_DEV_GUIDE.md` for prompt change review standards.
-- [ ] **Registry submission automation** — CRAN / PyPI / SSC submission via shipper. Profiles already handle multi-language; this adds the last-mile publish step.
+The framework handles multi-turn conversation and iterative refinement. Areas we'd like to improve:
+
+- [ ] **LaTeX formula input** — Let users paste formulas and get structured specs.
+- [ ] **Interactive simulation design** — Tweak DGP parameters conversationally.
+- [ ] **Incremental refinement** — Update a package from follow-up work without starting over.
 
 ---
 
-## Execution Order
+## Longer-Term Ideas
+
+Things we think could be valuable but haven't started. Some may turn out to be impractical.
+
+- [ ] **Related-work comparison** — Surface related estimators during planning. This is essentially a literature search problem; we don't know how well it can work yet.
+- [ ] **Numerical stability flags** — Warn about potential stability issues during code generation.
+- [ ] **Performance suggestions** — Point out obvious bottlenecks in generated code.
+
+---
+
+## Infrastructure (ongoing, as needed)
+
+We'll build these when there's real demand.
+
+- [ ] **Brain content** — The knowledge system needs real entries before we invest in search or analytics. First priority: populate it from our own workflows.
+- [ ] **C/C++ profile expansion** — Bring closer to R profile depth when someone needs it.
+- [ ] **Agent development guide** — Document how to safely review and modify agent prompts.
+- [ ] **CI for generated packages** — Automated checks on packages StatsClaw produces.
+- [ ] **Registry submission** — CRAN / PyPI / SSC submission support via shipper.
+
+---
+
+## Rough Timeline
 
 ```text
-Ongoing:    Community building + ecosystem track (started Mar 30)
-Apr 6–9:    Phase 0 — adoption blockers (all 6 in parallel)
-Apr 10–16:  Phase 1 — self-testing (eval + routing + isolation + dogfooding)
-Apr 17–30:  Phase 2 — paper-to-package
-May 1–14:   Phase 3 — deepen interactive specification
-May 15–31:  Phase 4 — intelligence
+Apr 8–14:   Phase 0 — onboarding basics
+Apr 15–25:  Phase 1 — self-testing
+Apr 25–May 15: Phase 2 — paper-to-package (exploratory)
+May 15–31:  Phase 3 — interactive specification improvements
+Ongoing:    Infrastructure + more working examples
 ```
 
 ---
 
-## Promotion Plan
+## How We Think About Progress
 
-| Date | Milestone | Action |
-|:-----|:----------|:-------|
-| Apr 9 | Hello-world ships | Post to r/statistics, r/econometrics, Hacker News |
-| Apr 16 | Eval harness live | Blog: "How we test an AI agent framework" |
-| Apr 30 | **Paper-to-Package demo** | **Blog + Twitter + EconTwitter — biggest moment** |
-| May 14 | Interactive deepening done | Demo: conversational simulation design |
-| May 31 | Intelligence features | Submit demo to useR! / PyData / StanCon |
-| Monthly | Ongoing | Release notes + community highlights + brain newsletter |
+The most useful thing we can do right now is produce more working examples — packages with enough complexity that a statistician looks at them and thinks "this saved me real time." The probit example shows the framework can build from a spec. R2PY shows it can handle a larger scope. We need more, and more varied.
 
-**Positioning**: StatsClaw's audit trail + adversarial verification satisfies reproducibility requirements from top journals (AEA, QJE, APSR). No other AI coding tool does this.
-
----
-
-## Success Metrics
-
-| Date | Target |
-|:-----|:-------|
-| Apr 9 | New user runs hello-world in 5 minutes |
-| Apr 16 | CI blocks isolation-breaking PRs |
-| Apr 30 | One arXiv paper → verified R package end to end |
-| May 14 | LaTeX formula input + conversational DGP design working |
-| May 31 | Auto-generated "related work" table for any new estimator |
+Pipeline isolation — where build, test, and simulation agents can't see each other's specs — is the core architectural idea. When independent pipelines converge, that's meaningful evidence. But the idea needs more evidence behind it, not marketing in front of it.
 
 ---
 
